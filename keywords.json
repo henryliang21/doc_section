@@ -1,0 +1,32 @@
+{
+  "Cover page": [
+    "BestCo\\s\\w?",
+    "For the years ended \\w+",
+    "Consolidated Financial Statements",
+    "Expressed in \\w+"
+  ],
+  "General information about financial statements": [
+    "\\w?\\s?[Aa]ssets\\s?\\w?",
+    "\\w?\\s?[Ll]iabilities\\s?\\w?",
+    "\\w?\\s?[Ee]quity\\s?\\w?",
+    "DirectorName"
+  ],
+  "Statement of Financial Position": [
+    "\\w?\\s?[Rr]evenue\\s?\\w?",
+    "\\w?\\s?[Cc]ost of sales\\s?\\w?",
+    "\\w?\\s?[Pp]rofit\\s?\\w?"
+  ],
+  "Statement of Profit": [
+    "\\w?\\s?[Yy]ears ended\\s?\\w?",
+    "\\w?\\s?[Rr]evenue\\s?\\w?",
+    "\\w?\\s?[Cc]ost of sales\\s?\\w?",
+    "\\w?\\s?[Pp]rofit\\s?\\w?"
+  ],
+  "Statement of Cash Flow": [
+
+  ],
+  "Notes to Financial Statements": [
+    "\\w+\\sincorporated pursuant to the Business Corporations Act of\\s\\w+",
+    "\\w?\\s?BASIS OF PREPARATION\\w?\\s?"
+  ]
+}
