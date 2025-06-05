@@ -1,0 +1,4 @@
+from .cover_page_detector import cover_page_detector
+from .sfp_detector import sfp_detector
+from .sci_detector import sci_detector
+from .notes_of_financial_statement_detector import notes_of_financial_statement_detector

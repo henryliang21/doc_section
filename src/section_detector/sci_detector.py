@@ -1,8 +1,8 @@
 from .util_func import classify_text_by_regex, normalize_section_title
 
 # This section name is used to check with the json keyword section name
-SECTION = "Statement of Financial Position"
-def sfp_detector(blocks):
+SECTION = "Statement of Comprehensive Income"
+def sci_detector(blocks):
     detected_block = []
     for block in blocks:
         if block["type"] == "paragragh":
@@ -25,6 +25,6 @@ def sfp_detector(blocks):
     return {
         "section_header": SECTION,
         "normalized_section": normalize_section_title(SECTION),
-        "start_block": min(detected_block),
-        "end_block": max(detected_block)
+        "start_index": min(detected_block),
+        "end_index": max(detected_block)
     }

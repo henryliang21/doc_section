@@ -1,8 +1,7 @@
 import re
 import json
 from lxml import etree
-# from .section_detector import cover_page_detector
-from .section_detector.util_func import *
+from .section_detector import *
 
 
 # Word XML Namespaces
@@ -77,60 +76,23 @@ def extract_blocks(file_path):
             index += 1
     return blocks
 
-
-
-# def detect_statement_section(blocks, start_idx):
-#     block = blocks[start_idx]
-#     if "Heading" in (block.get("style") or ""):
-#         title = block["text"].lower()
-#         if "statement of financial position" in title:
-#             return {
-#                 "section_type": "statement_of_financial_position",
-#                 "start_block": start_idx,
-#                 "end_block": start_idx + 5  # dummy rule: next 5 blocks
-#             }
-#         elif "statement of comprehensive income" in title:
-#             return {
-#                 "section_type": "statement_of_comprehensive_income",
-#                 "start_block": start_idx,
-#                 "end_block": start_idx + 1  # dummy rule
-#             }
-#     return None
-
-# def detect_note_section(blocks, start_idx):
-#     text = blocks[start_idx]["text"]
-#     match = re.match(r"(Note\s*)?(\d+)[\.:]?\s*(.+)", text, re.IGNORECASE)
-#     if match:
-#         note_number = int(match.group(2))
-#         title = match.group(3).strip()
-#         # dummy rule: note ends after 7 blocks
-#         return {
-#             "section_type": f"note_{note_number}",
-#             "note_number": note_number,
-#             "normalized_section": title,
-#             "start_block": start_idx,
-#             "end_block": start_idx + 6
-#         }
-#     return None
-
 def detect_sections(blocks):
     sections = []
     current_section = None
 
-    # section_detectors = [
-    #     cover_page_detector,
-    #     # ,detect_statement_section
-    #     # ,detect_note_section
-    # ]
+    section_detectors = [
+        cover_page_detector,
+        sfp_detector,
+        sci_detector,
+        notes_of_financial_statement_detector
+    ]
 
-    # for detector in section_detectors:
-    #     result = detector(blocks)
-    #     sections.append(result)
+    for detector in section_detectors:
+        result = detector(blocks)
+        if isinstance(result, list):
+            for i in result:
+                sections.append(i)
+        else:
+            sections.append(result)
 
-    for block in blocks:
-        if block["type"] == "paragragh":
-            section = classify_text_by_regex(block)
-            block['section'] = section
-
-    print(json.dumps(blocks, indent=2))
     return sections
