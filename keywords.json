@@ -15,7 +15,7 @@
     "DirectorName"
   ],
   "Statement of Comprehensive Income": [
-    "\\w?\\s?[Yy]ears ended\\s?\\w?",
+    "^[Yy]ears ended\\s?\\w?",
     "^[Rr][Ee][Vv][Ee][Nn][Uu][Ee]\\s?\\w?",
     "^[Cc][Oo][Ss][Tt] [Oo][Ff] [Ss][Aa][Ll][Ee][Ss]\\s?\\w?",
     "^\\w?\\s?[Pp][Rr][Oo][Ff][Ii][Tt]\\s?\\w?"

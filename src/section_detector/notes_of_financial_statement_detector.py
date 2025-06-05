@@ -4,6 +4,7 @@ from .util_func import classify_text_by_regex, normalize_section_title
 # This section name is used to check with the json keyword section name
 SECTION = "Notes to Financial Statements"
 SUBSECTION_REGEX = "^\\d[.,]"
+SUBSECTION_NOT_CONTAINING = "[Cc]ontinued"
 def notes_of_financial_statement_detector(blocks):
     sections = []
     for block in blocks:
@@ -11,7 +12,7 @@ def notes_of_financial_statement_detector(blocks):
             block_section = classify_text_by_regex(block["text"])
             # If the block is identified as the designated section, then it will be marked as the beginning of the section
             if block_section == SECTION:
-                if (re.search(SUBSECTION_REGEX, block["text"])):
+                if re.search(SUBSECTION_REGEX, block["text"]) and not re.search(SUBSECTION_NOT_CONTAINING, block["text"]) :
                   sections.append({
                       "section_header": SECTION,
                       "normalized_section": normalize_section_title(re.sub(SUBSECTION_REGEX, "", block["text"])),
@@ -26,5 +27,6 @@ def notes_of_financial_statement_detector(blocks):
                 s["end_index"] = sections[i+1]["block_index"] - 1
             else:
                 s["end_index"] = len(blocks) - 1
+            del s["block_index"]
             result.append(s)
     return result
